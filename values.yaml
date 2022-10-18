@@ -1,0 +1,25 @@
+project: projectname
+environment: dev
+destination:
+  server: <server url accessible from the argocd installation>
+  namespace: dev
+
+# A default repo to use if not mentioned in the below list of applications, 
+# this will be used as the default repo for all of them that doesnt have a repo mentioned in the apps list
+defaultRepository: https://charts.liberty.captainfresh.in/captainfresh/stable
+
+#inject default labels and parameters for all apps installed in this deployment,
+#usefull to laebl common labels for all the apps installed under this installation
+#you can ignore the default parameters by using ignoreParameters in applicaiton configs.
+parameters: []
+# - name: "nginx-ingress.controller.service.annotations.external-dns\\.alpha\\.kubernetes\\.io/hostname"
+#   value: mydomain.example.com
+# - name: "ingress.annotations.kubernetes\\.io/tls-acme"
+#   value: "true"
+#   forceString: true # ensures that value is treated as a string
+
+applications:
+- chart: redis
+  version: "16.13.2"
+  repository: https://charts.bitnami.com/bitnami
+  ignoreParameters: true
